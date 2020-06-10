@@ -13,16 +13,14 @@ import com.celiosato.clinica.services.UsuarioService;
 @RestController
 @RequestMapping(value = "/usuarios")
 public class UsuarioResource {
-	
+
 	@Autowired
 	private UsuarioService usuarioService;
-	
+
 //Busca por um usuario
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
-	public ResponseEntity<Usuario>find(@PathVariable Integer id){
-		Usuario usuario =  usuarioService.find(id);
+	public ResponseEntity<Usuario> find(@PathVariable Integer id) {
+		Usuario usuario = usuarioService.find(id);
 		return ResponseEntity.ok().body(usuario);
 	}
-			
-
 }
