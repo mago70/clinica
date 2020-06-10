@@ -7,22 +7,21 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.celiosato.clinica.domain.Usuario;
-import com.celiosato.clinica.services.UsuarioService;
+import com.celiosato.clinica.domain.Eritrograma;
+import com.celiosato.clinica.services.EritrogramaService;
 
 @RestController
-@RequestMapping(value = "/usuarios")
-public class UsuarioResource {
+@RequestMapping(value = "/exames")
+public class EritrogramaResource {
 	
 	@Autowired
-	private UsuarioService usuarioService;
-	
+	private EritrogramaService eritrogramaService;
+
 //Busca por um usuario
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
-	public ResponseEntity<Usuario>find(@PathVariable Integer id){
-		Usuario usuario =  usuarioService.find(id);
-		return ResponseEntity.ok().body(usuario);
+	public ResponseEntity<Eritrograma>find(@PathVariable Integer id){
+		Eritrograma eritrograma = eritrogramaService.find(id);
+		return ResponseEntity.ok().body(eritrograma);
 	}
-			
 
 }
