@@ -6,6 +6,10 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 public class Eritrograma implements Serializable{
@@ -19,16 +23,22 @@ public class Eritrograma implements Serializable{
 	private double hemoglobina;
 	private String obs;
 	
+	@JsonIgnore
+	@ManyToOne
+	@JoinColumn(name = "usuario_id")
+	private Usuario usuario;
+	
 	public Eritrograma() {
 		
 	}
 
-	public Eritrograma(Integer id, double eritrocitos, double hemoglobina, String obs) {
+	public Eritrograma(Integer id, double eritrocitos, double hemoglobina, String obs, Usuario usuario) {
 		super();
 		this.id = id;
 		this.eritrocitos = eritrocitos;
 		this.hemoglobina = hemoglobina;
 		this.obs = obs;
+		this.usuario = usuario;
 	}
 
 	public Integer getId() {
@@ -62,6 +72,14 @@ public class Eritrograma implements Serializable{
 	public void setObs(String obs) {
 		this.obs = obs;
 	}
+	
+	public Usuario getUsuario() {
+		return usuario;
+	}
+
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
+	}
 
 	@Override
 	public int hashCode() {
@@ -87,6 +105,5 @@ public class Eritrograma implements Serializable{
 			return false;
 		return true;
 	}
-
 	
 }

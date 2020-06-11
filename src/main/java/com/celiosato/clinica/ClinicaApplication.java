@@ -33,9 +33,9 @@ public class ClinicaApplication implements CommandLineRunner{
 		Usuario user4 = new Usuario(null, "Felipe Yuto Sato", "12345678999", "felipe@gmail.com", "92933665588");
 		Usuario user5 = new Usuario(null, "Igor Yuske Sato", "22255588877", "igor@gmail.com", "92955887744");
 		
-		Eritrograma eri1 = new Eritrograma(null, 12.6, 58.9, "Teste para primeiro exame");
-		Eritrograma eri2 = new Eritrograma(null, 98.0, 14.7, "Teste para segundo exame");
-		Eritrograma eri3 = new Eritrograma(null, 65.2, 34.0, "Teste para terceiro exame");
+		Eritrograma eri1 = new Eritrograma(null, 12.6, 58.9, "Teste para primeiro exame", user1);
+		Eritrograma eri2 = new Eritrograma(null, 98.0, 14.7, "Teste para segundo exame", user2);
+		Eritrograma eri3 = new Eritrograma(null, 65.2, 34.0, "Teste para terceiro exame", user3);
 		
 		
 		usuarioRepository.saveAll(Arrays.asList(user1, user2, user3, user4, user5));

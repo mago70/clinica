@@ -1,11 +1,16 @@
 package com.celiosato.clinica.domain;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 public class Usuario implements Serializable{
@@ -19,6 +24,10 @@ public class Usuario implements Serializable{
 	private String CPF;
 	private String email;
 	private String telefone;
+	
+	@JsonIgnore
+	@OneToMany(mappedBy = "usuario")
+	private List<Eritrograma> eritrograma = new ArrayList<>();
 
 	public Usuario() {
 		
@@ -72,6 +81,14 @@ public class Usuario implements Serializable{
 	public void setTelefone(String telefone) {
 		this.telefone = telefone;
 	}
+	
+	public List<Eritrograma> getEritrograma() {
+		return eritrograma;
+	}
+
+	public void setEritrograma(List<Eritrograma> eritrograma) {
+		this.eritrograma = eritrograma;
+	}
 
 	@Override
 	public int hashCode() {
@@ -97,6 +114,5 @@ public class Usuario implements Serializable{
 			return false;
 		return true;
 	}
-	
 	
 }
