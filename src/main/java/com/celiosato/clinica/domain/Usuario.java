@@ -10,6 +10,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
+import com.celiosato.clinica.domain.enums.TipoUsuario;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
@@ -21,9 +22,10 @@ public class Usuario implements Serializable{
 	private Integer id;
 	
 	String nomeCompleto;
-	private String CPF;
+	private String cpf;
 	private String email;
 	private String telefone;
+	private Integer tipo;
 	
 	@JsonIgnore
 	@OneToMany(mappedBy = "usuario")
@@ -33,13 +35,14 @@ public class Usuario implements Serializable{
 		
 	}
 
-	public Usuario(Integer id, String nomeCompleto, String cPF, String email, String telefone) {
+	public Usuario(Integer id, String nomeCompleto, String cpf, String email, String telefone, TipoUsuario tipo) {
 		super();
 		this.id = id;
 		this.nomeCompleto = nomeCompleto;
-		CPF = cPF;
+		this.cpf = cpf;
 		this.email = email;
 		this.telefone = telefone;
+		this.tipo = tipo.getCod();
 	}
 
 	public Integer getId() {
@@ -59,11 +62,11 @@ public class Usuario implements Serializable{
 	}
 
 	public String getCPF() {
-		return CPF;
+		return cpf;
 	}
 
 	public void setCPF(String cPF) {
-		CPF = cPF;
+		cpf = cPF;
 	}
 
 	public String getEmail() {
@@ -89,6 +92,15 @@ public class Usuario implements Serializable{
 	public void setEritrograma(List<Eritrograma> eritrograma) {
 		this.eritrograma = eritrograma;
 	}
+	
+	public TipoUsuario getTipo() {
+		return TipoUsuario.toEnum(tipo);
+	}
+
+	public void setTipo(TipoUsuario tipo) {
+		this.tipo = tipo.getCod();
+	}
+	
 
 	@Override
 	public int hashCode() {
@@ -114,5 +126,5 @@ public class Usuario implements Serializable{
 			return false;
 		return true;
 	}
-	
+
 }

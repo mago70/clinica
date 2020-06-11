@@ -9,6 +9,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import com.celiosato.clinica.domain.Eritrograma;
 import com.celiosato.clinica.domain.Usuario;
+import com.celiosato.clinica.domain.enums.TipoUsuario;
 import com.celiosato.clinica.repositories.EritrogramaRepository;
 import com.celiosato.clinica.repositories.UsuarioRepository;
 
@@ -27,11 +28,11 @@ public class ClinicaApplication implements CommandLineRunner{
 
 	@Override
 	public void run(String... args) throws Exception {
-		Usuario user1 = new Usuario(null, "Celio Sato", "10872972407", "mago70@gmail.com", "92981293679");
-		Usuario user2 = new Usuario(null, "Midori Yano", "27685498725", "midori@gmail.com", "92981457587");
-		Usuario user3 = new Usuario(null, "Bruna Yumi Sato", "32165498744", "bruna@gmail.com", "92984578658");
-		Usuario user4 = new Usuario(null, "Felipe Yuto Sato", "12345678999", "felipe@gmail.com", "92933665588");
-		Usuario user5 = new Usuario(null, "Igor Yuske Sato", "22255588877", "igor@gmail.com", "92955887744");
+		Usuario user1 = new Usuario(null, "Celio Sato", "10872972407", "mago70@gmail.com", "92981293679", TipoUsuario.ADMINISTRADOR);
+		Usuario user2 = new Usuario(null, "Midori Yano", "27685498725", "midori@gmail.com", "92981457587", TipoUsuario.ADMINISTRADOR);
+		Usuario user3 = new Usuario(null, "Bruna Yumi Sato", "32165498744", "bruna@gmail.com", "92984578658", TipoUsuario.PACIENTE);
+		Usuario user4 = new Usuario(null, "Felipe Yuto Sato", "12345678999", "felipe@gmail.com", "92933665588", TipoUsuario.PACIENTE);
+		Usuario user5 = new Usuario(null, "Igor Yuske Sato", "22255588877", "igor@gmail.com", "92955887744", TipoUsuario.PACIENTE);
 		
 		Eritrograma eri1 = new Eritrograma(null, 12.6, 58.9, "Teste para primeiro exame", user1);
 		Eritrograma eri2 = new Eritrograma(null, 98.0, 14.7, "Teste para segundo exame", user2);
