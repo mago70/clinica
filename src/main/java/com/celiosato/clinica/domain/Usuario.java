@@ -21,7 +21,7 @@ public class Usuario implements Serializable{
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	
-	String nomeCompleto;
+	private String nomeCompleto;
 	private String cpf;
 	private String email;
 	private String telefone;
