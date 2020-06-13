@@ -2,6 +2,7 @@ package com.celiosato.clinica.resources;
 
 import java.net.URI;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.celiosato.clinica.domain.Usuario;
+import com.celiosato.clinica.dto.UsuarioDTO;
 import com.celiosato.clinica.services.UsuarioService;
 
 @RestController
@@ -35,6 +37,7 @@ public class UsuarioResource {
 	@RequestMapping(method = RequestMethod.GET)
 	public ResponseEntity<List<Usuario>> findAll() {
 		List<Usuario> list = usuarioService.findAll();
+		//List<UsuarioDTO> listDto = list.stream().map(obj -> new UsuarioDTO(obj)).collect(Collectors.toList());
 		return ResponseEntity.ok().body(list);
 	}
 	
@@ -49,7 +52,13 @@ public class UsuarioResource {
 	}
 	
 //Alterar um usuario
-	
+	@RequestMapping(value = "/{id}", method = RequestMethod.PUT)
+	public ResponseEntity<Void> update(@RequestBody UsuarioDTO objDto, @PathVariable Integer id){
+		Usuario obj = usuarioService.fromDTO(objDto);
+		obj.setId(id);
+		obj = usuarioService.update(obj);
+		return ResponseEntity.noContent().build();
+	}	
 
 //Deletar um usuario
 	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
@@ -59,13 +68,14 @@ public class UsuarioResource {
 	}
 	
 	@RequestMapping(value="/page",method=RequestMethod.GET)// verbos GET, POST, DELETE
-	public ResponseEntity<Page<Usuario>> findPage(
+	public ResponseEntity<Page<UsuarioDTO>> findPage(
 			@RequestParam(value = "page", defaultValue = "0") Integer page, 
 			@RequestParam(value = "linesPerPage", defaultValue = "24")Integer linesPerPage, 
 			@RequestParam(value = "orderBy", defaultValue = "nomeCompleto")String orderBy, 
 			@RequestParam(value = "direction", defaultValue = "ASC")String direction){
 		Page<Usuario> list = usuarioService.findPage(page, linesPerPage, orderBy, direction);
-		return ResponseEntity.ok().body(list);
+		Page<UsuarioDTO> listDto = list.map(obj -> new UsuarioDTO(obj));
+		return ResponseEntity.ok().body(listDto);
 	}
 	
 	

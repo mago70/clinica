@@ -20,7 +20,7 @@ public class Usuario implements Serializable{
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
-	
+
 	private String nomeCompleto;
 	private String cpf;
 	private String email;
@@ -42,7 +42,7 @@ public class Usuario implements Serializable{
 		this.cpf = cpf;
 		this.email = email;
 		this.telefone = telefone;
-		this.tipo = tipo.getCod();
+		this.tipo = (tipo==null) ? null : tipo.getCod();
 	}
 
 	public Integer getId() {

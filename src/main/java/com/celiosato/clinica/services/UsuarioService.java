@@ -11,6 +11,7 @@ import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Service;
 
 import com.celiosato.clinica.domain.Usuario;
+import com.celiosato.clinica.dto.UsuarioDTO;
 import com.celiosato.clinica.repositories.UsuarioRepository;
 import com.celiosato.clinica.services.exceptions.DataIntegrityException;
 import com.celiosato.clinica.services.exceptions.ObjectNotFoundException;
@@ -39,6 +40,19 @@ public class UsuarioService {
 		return usuarioRepository.save(obj);
 	}
 	
+//Editar um exame
+	public Usuario update(Usuario obj) {
+		Usuario newObj = find(obj.getId());
+		updateData(newObj, obj);
+		return usuarioRepository.save(newObj);
+	}
+//Edita somente os campos citados abaixo	
+	private void updateData(Usuario newObj, Usuario obj) {
+		newObj.setNomeCompleto(obj.getNomeCompleto());
+		newObj.setEmail(obj.getEmail());
+		newObj.setTelefone(obj.getTelefone());
+	}
+	
 //Deletar um usuario
 	public void delete(Integer id) {
 		find(id);
@@ -47,8 +61,7 @@ public class UsuarioService {
 		}
 		catch (DataIntegrityViolationException e) {
 			throw new DataIntegrityException("Não é possivel excluir um usuario que possui exames!");
-		}
-		
+		}	
 	}
 	
 //Buscar Usuario com paginação(ADMIN)
@@ -56,5 +69,11 @@ public class UsuarioService {
 		PageRequest pageRequest = PageRequest.of(page, linesPerPage, Direction.valueOf(direction), orderBy);
 		return usuarioRepository.findAll(pageRequest);	
 	}
+	
+	public Usuario fromDTO(UsuarioDTO objDto) {
+		return new Usuario(objDto.getId(), objDto.getNomeCompleto(), null, objDto.getEmail(), objDto.getTelefone(), null);
+	}
+	
+	
 
 }
