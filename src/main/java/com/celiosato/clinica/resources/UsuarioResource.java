@@ -2,7 +2,6 @@ package com.celiosato.clinica.resources;
 
 import java.net.URI;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -53,8 +52,8 @@ public class UsuarioResource {
 	
 //Alterar um usuario
 	@RequestMapping(value = "/{id}", method = RequestMethod.PUT)
-	public ResponseEntity<Void> update(@RequestBody UsuarioDTO objDto, @PathVariable Integer id){
-		Usuario obj = usuarioService.fromDTO(objDto);
+	public ResponseEntity<Void> update(@RequestBody Usuario obj, @PathVariable Integer id){
+
 		obj.setId(id);
 		obj = usuarioService.update(obj);
 		return ResponseEntity.noContent().build();

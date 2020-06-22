@@ -6,10 +6,10 @@
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>2.3.0.RELEASE</version>
-		<relativePath /> <!-- lookup parent from repository -->
+		<version>2.2.6.RELEASE</version>
+		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>com.celiosato</groupId>
+	<groupId>com.celiosato.clinica</groupId>
 	<artifactId>clinica</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>clinica</name>
@@ -68,5 +68,7 @@
 			</plugin>
 		</plugins>
 	</build>
+	
+	
 
 </project>

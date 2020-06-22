@@ -2,7 +2,7 @@ package com.celiosato.clinica.domain.enums;
 
 public enum TipoUsuario {
 
-	PACIENTE(1, "Paciente"), 
+	PACIENTE(1, "Paciente"),
 	ADMINISTRADOR(2, "Administrador");
 
 	private int cod;

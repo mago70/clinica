@@ -16,6 +16,9 @@ public class EritrogramaService {
 
 	@Autowired
 	private EritrogramaRepository eritrogramaRepository;
+	
+	@Autowired
+	private UsuarioService usuarioService;
 
 //Buscar um unico exame por id
 	public Eritrograma find(Integer id) {
@@ -31,14 +34,23 @@ public class EritrogramaService {
 	
 //Inserir um exame
 	public Eritrograma insert(Eritrograma obj) {
-		obj.setId(null);
-		return eritrogramaRepository.save(obj);
-	}
+		Usuario newObj = usuarioService.find(obj.getId());
+		Eritrograma newEri = new Eritrograma(null ,obj.getEritrocitos(), obj.getHemoglobina(), obj.getObs(), newObj);	
+		obj = eritrogramaRepository.save(newEri);
+		return obj;
+	}	
 	
-//Editar um exame
+//Alterar um exame
 	public Eritrograma update(Eritrograma obj) {
-		find(obj.getId());
-		return eritrogramaRepository.save(obj);
+		Eritrograma newObj = find(obj.getId());
+		updateData(newObj, obj);
+		return eritrogramaRepository.save(newObj);
+	}
+//Alterar somente os campos citados abaixo	
+	private void updateData(Eritrograma newObj, Eritrograma obj) {
+		newObj.setEritrocitos(obj.getEritrocitos());
+		newObj.setHemoglobina(obj.getHemoglobina());
+		newObj.setObs(obj.getObs());
 	}
 
 //Deletar um exame
@@ -46,5 +58,6 @@ public class EritrogramaService {
 		find(id);
 		eritrogramaRepository.deleteById(id);
 	}
+	
 
 }

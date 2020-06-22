@@ -55,15 +55,15 @@ public class EritrogramaResource {
 		List<Eritrograma> list = eritrogramaService.findAll();
 		return ResponseEntity.ok().body(list);
 	}
-
-//Inserir um exame
+	
+//Inserir um exame (deve se passar o id do Paciente. Exemplo: "id": 6)
 	@RequestMapping(method = RequestMethod.POST)
 	public ResponseEntity<Void> Insert(@RequestBody Eritrograma obj) {
 		obj = eritrogramaService.insert(obj);
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(obj.getId()).toUri();
 		return ResponseEntity.created(uri).build();
 	}
-	
+
 //Alterar um exame 
 	@RequestMapping(value = "/{id}", method = RequestMethod.PUT)
 	public ResponseEntity<Void> update(@RequestBody Eritrograma obj, @PathVariable Integer id){
@@ -78,9 +78,6 @@ public class EritrogramaResource {
 		eritrogramaService.delete(id);
 		return ResponseEntity.noContent().build();
 	}
-	
-	
-	
-	
+		
 
 }
